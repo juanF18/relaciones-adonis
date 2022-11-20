@@ -5,12 +5,11 @@ export default class extends BaseSchema {
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
+      table.increments('id').notNullable()
       //referencia al id del rol es una foreign key
-      table.integer('id_rol').unsigned().references('roles.id')
-      table.string('nombre', 60)
-      table.string('correo', 254)
-      table.string('contrasena', 256)
+      table.string('nombre', 60).notNullable()
+      table.string('correo', 254).notNullable().unique()
+      table.string('contrasena', 256).notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
